@@ -1,7 +1,7 @@
 /.gobin/
 /.idea/
-/examples/*
+/examples/*/*
 /metamodel/
 /model/
 /vendor/
-!/examples/*.go
+!/examples/*/*.go
