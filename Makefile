@@ -29,6 +29,9 @@ model_url:=https://github.com/openshift-online/ocm-api-model.git
 metamodel_version:=v0.0.31
 metamodel_url:=https://github.com/openshift-online/ocm-api-metamodel.git
 
+# Allow overriding: `make lint container_runner=docker`.
+container_runner:=podman
+
 .PHONY: examples
 examples:
 	cd examples && \
@@ -46,7 +49,7 @@ fmt:
 
 .PHONY: lint
 lint:
-	golangci-lint run
+	$(container_runner) run --rm --security-opt label=disable --volume="${PWD}:/app" --workdir=/app golangci/golangci-lint:v1.10.2 run
 
 .PHONY: generate
 generate: model metamodel
